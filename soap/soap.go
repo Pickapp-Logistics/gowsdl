@@ -32,6 +32,7 @@ type SOAPEnvelope struct {
 	XMLName xml.Name `xml:"soap:Envelope"`
 	XmlNS   string   `xml:"xmlns:soap,attr"`
 	XmlNS1  string   `xml:"xmlns:ns1,attr"`
+	XmlXSI  string   `xml:"xmlns:xsi,attr"`
 
 	Header *SOAPHeader
 	Body   SOAPBody
@@ -418,6 +419,7 @@ func (s *Client) call(ctx context.Context, soapAction, xmlns1 string, request, r
 	envelope := SOAPEnvelope{
 		XmlNS:  XmlNsSoapEnv,
 		XmlNS1: xmlns1,
+		XmlXSI: "http://www.w3.org/2001/XMLSchema-instance",
 	}
 
 	if s.headers != nil && len(s.headers) > 0 {
